@@ -1,0 +1,30 @@
+﻿namespace TransactionsTrackerApp.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class InitialModel : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.Transactions",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Date = c.DateTime(nullable: false),
+                        Category = c.String(),
+                        IsIncome = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.Transactions");
+        }
+    }
+}
